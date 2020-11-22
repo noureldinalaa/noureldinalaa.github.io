@@ -5,6 +5,54 @@ header:
   image: "/images/zakim.jpg"
 ---
 
-I'm a senior data scientist who excels at data wrangling, machine learning, exploratory analysis, and data visualizations.
+I am a Deep/Machine learning engineer, I am interested in building applications that have impact on our real-world using the knowledge I have in  NLP, Computer Vision and self-driving cars. The more challenges i face, the more passionate and eager i get to solve them.
 
-Etc, etc, etc
+Currently, I am pursuing my master's degree at Bielefeld university in intelligent systems.
+I am working now on two interesting projects:
+- Detecting Depression in social media.
+- Monocular visual odometry For Duckie Town competition.
+
+## University projects
+### Depression Detection[[github]](https://github.com/noureldinalaa/depression_detector)
+
+-  Dataset used from early risk competition in which they have collected data from users in social media especially Reddit in order to detect depression[[link]](https://early.irlab.org/2018/index.html)
+- LSTM , BERT Models used in training.
+- Skorch used also to try cross validation.
+- Pytorch library used and Spacy used for tokanization.
+
+### Monocular visual odometry for Duckie Town competition(in progress)
+
+- Detecting features from an image and calculate the optical flow between two frames.
+- Research area still in progress (create a neural network architecture to calculate instead of using opencv library)
+- Pytorch and opencv are used in this project.
+
+### Nod detection using SVM
+
+- SVM model to classify nod or not by feedin it annotated videos with nods.
+- Dlib machine learning library used and C++ used.
+
+### Manipulating robot arm (KUKA) using VR Controller (ROS C++)
+
+- Controlling KUKA arm to imitate the same motion as it is receiving from the VR Controller .
+- Using ROS (Robotic operating system) to receive the current pose of the KUKA arm  and the VR controller to calculate the twist command.
+- Using OROCOS components to control KUKA in real time.
+
+## Udacity deep learning nanodegree projects
+
+### Face generation[[github]](https://github.com/noureldinalaa/Face_Generation)
+
+- Generate images of new and realistic human faces using CelebA dataset.
+- DCGAN(Deep Convolutional Generative Adversarial Networks) used for training.
+- Pytorch library used.
+
+### Dermatologist-ai[[github]](https://github.com/noureldinalaa/dermatologist-ai)
+
+- Create a model to predict and diagnose skin lesion images as one of three different skin diseases (melanoma, nevus, or seborrheic keratosis).
+- Created normal CNN architecture and transfer learning also used, using pretrained model(ResNet and Inception).
+- Pytorch used
+
+### TV script generator
+
+- Generate a new fake TV script from Seinfeld dataset.
+- RNN model used for training.
+- Pytorch library used.
