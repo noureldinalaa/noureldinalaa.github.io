@@ -2,7 +2,7 @@
 title: "About"
 permalink: /about/
 header:
-  image: "/images/zakim.jpg"
+  image: "/images/zakim_1.jpg"
 ---
 
 I am a Deep/Machine learning engineer, I am interested in building applications that have impact on our real-world using the knowledge I have in  NLP, Computer Vision and self-driving cars. The more challenges i face, the more passionate and eager i get to solve them.
@@ -51,7 +51,7 @@ I am working now on two interesting projects:
 - Created normal CNN architecture and transfer learning also used, using pretrained model(ResNet and Inception).
 - Pytorch used
 
-### TV script generator
+### TV script generator[[github]](https://github.com/noureldinalaa/TV_Script_Generator)
 
 - Generate a new fake TV script from Seinfeld dataset.
 - RNN model used for training.
