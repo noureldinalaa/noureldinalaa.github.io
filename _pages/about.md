@@ -26,7 +26,7 @@ Worked on different research and production tasks including:
 - Worked as a technical evangelist by presenting different Microsoft solutions and devices like Azure and Hololens in Microsoft's events.
 - Introduce Microsoft solutions to startups(Xamarin, Azure).
 
-## University projects
+## University's projects
 ### Depression Detection[[github]](https://github.com/noureldinalaa/depression_detector)
 
 -  Dataset used from early risk competition in which they have collected data from users in social media especially Reddit in order to detect depression[[link]](https://early.irlab.org/2018/index.html)
@@ -51,7 +51,7 @@ Worked on different research and production tasks including:
 - Using ROS (Robotic operating system) to receive the current pose of the KUKA arm  and the VR controller to calculate the twist command.
 - Using OROCOS components to control KUKA in real time.
 
-## Udacity deep learning nanodegree projects
+## Udacity's deep learning nanodegree projects
 
 ### Face generation[[github]](https://github.com/noureldinalaa/Face_Generation)
 
