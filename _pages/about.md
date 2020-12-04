@@ -12,6 +12,20 @@ I am working now on two interesting projects:
 - Detecting Depression in social media.
 - Monocular visual odometry For Duckie Town competition.
 
+
+## Experience
+### Student Research Assistant at Fraunhofer institute (Germany) (june 2018 - september 2019)
+Worked on different research and production tasks including:
+- Evaluation of Fuzzy string matching and natural language processing procedures well as implementation of a demonstration for automated word processing with the help of Fuzzy string matching and natural language processing.
+- Development of graphical java swing user interface for control and manipulating UML/SysML models.
+- Development of QVTO - based model transformation for the transfer of UML/SysML Models to forms of presentation and the development of programmes for the automated creation of UML/SysML diagrams,
+-participating in research activities and presenting the research results in events as well as teaching assistant in a company-university projects in context of Model based system engineering.
+
+
+### Intern at Microsoft AppFactory (Egypt) (October 2016 - June 2017)
+- Worked as a technical evangelist by presenting different Microsoft solutions and devices like Azure and Hololens in Microsoft's events.
+- Introduce Microsoft solutions to startups(Xamarin, Azure).
+
 ## University projects
 ### Depression Detection[[github]](https://github.com/noureldinalaa/depression_detector)
 
