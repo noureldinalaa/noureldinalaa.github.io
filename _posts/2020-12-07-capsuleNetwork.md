@@ -10,7 +10,7 @@ layout: single
 ---
 ## Capsule Network
 
-In this blogpost i will try to explain and implement Capsule Network. MNIST images will be used as an input.
+In this blog post i will try to explain and implement Capsule Network. MNIST images will be used as an input.
 
 To implement capsule Network, we need to understand what are capsules first and what advantages do they have compared to convolutional neural network.
 
