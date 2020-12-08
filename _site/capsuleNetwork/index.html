@@ -1,0 +1,998 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.9.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Simple explanation for Capsule Network with Pytoch implementation - Nour</title>
+<meta name="description" content="Capsule Network, Dynamic Routing , Pytorch">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Nour">
+<meta property="og:title" content="Simple explanation for Capsule Network with Pytoch implementation">
+<meta property="og:url" content="http://localhost:4000/capsuleNetwork/">
+
+
+  <meta property="og:description" content="Capsule Network, Dynamic Routing , Pytorch">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/images/capsules/encoder_cover.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2020-12-08T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/capsuleNetwork/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Nour",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Nour Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Nour</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about/" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/data-wrangling/" >Data Wrangling Projects</a>
+            </li>
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" "
+>
+  
+    <img src="http://localhost:4000/images/capsules/encoder_cover.png" alt="Simple explanation for Capsule Network with Pytoch implementation" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="http://localhost:4000/images/bio-pic-2.jpg" alt="Nour" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Nour</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Machine Learning | Deep Learning
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">London,UK and Bielefeld,Germany</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/noureldinalaa" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/noureldinalaa" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Simple explanation for Capsule Network with Pytoch implementation">
+    <meta itemprop="description" content="Capsule Network, Dynamic Routing , Pytorch">
+    <meta itemprop="datePublished" content="December 08, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Simple explanation for Capsule Network with Pytoch implementation
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-bookmark"></i> Capsule Network</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#capsule-network">Capsule Network</a>
+    <ul>
+      <li><a href="#so-what-are-capsules">so what are capsules?</a></li>
+      <li><a href="#what-advantages-does-it-have-compared-to-convolutional-neural-networkcnn">What advantages does it have compared to Convolutional Neural Network(CNN)?</a></li>
+    </ul>
+  </li>
+  <li><a href="#model-architecture">Model Architecture</a></li>
+  <li><a href="#1encoder">1)Encoder</a>
+    <ul>
+      <li><a href="#athe-convolutional-layer">A)The convolutional layer</a></li>
+      <li><a href="#bprimary-capsules">B)Primary capsules</a></li>
+      <li><a href="#cdigit-capsules">C)Digit Capsules</a></li>
+      <li><a href="#dynamic-routing">Dynamic Routing</a></li>
+      <li><a href="#dynamic-routing-algorithm">Dynamic Routing Algorithm</a></li>
+    </ul>
+  </li>
+  <li><a href="#2decoder">2)Decoder</a>
+    <ul>
+      <li><a href="#margin-loss">Margin Loss</a></li>
+    </ul>
+  </li>
+  <li><a href="#train-the-network">Train the network</a></li>
+  <li><a href="#test-the-network">Test the network</a></li>
+  <li><a href="#references-">References :</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="capsule-network">Capsule Network</h2>
+
+<p>In this blogpost i will try to explain and implement Capsule Network. MNIST images will be used as an input.</p>
+
+<p>To implement capsule Network, we need to understand what are capsules first and what advantages do they have compared to convolutional neural network.</p>
+
+<h3 id="so-what-are-capsules">so what are capsules?</h3>
+
+<ul>
+  <li>Briefly explaining it, capsules are small group of neurons where each neuron in a capsule represents various properties of a particular image part.</li>
+  <li>
+    <p>Capsules represent relationships between parts of a whole object by using <strong>dynamic routing</strong> to weight the connections between one layer of capsules and the next and creating strong connections between spatially-related object parts, will be discussed later.</p>
+  </li>
+  <li>The output of each capsule is a vector, this vector has a magnitude and orientation.
+    <ul>
+      <li>
+        <p>Magnitude : It is an indicates if that particular part of image is present or not. Basically we can summerize it as the probability of the part existance (It has to be between 0 and 1).</p>
+      </li>
+      <li>
+        <p>Oriantation : It changes if one of the properties of that particular image has changed.</p>
+      </li>
+    </ul>
+
+    <p>Let us have an example to understand it more and make it clear.
+As shown in the following image, capsules will detect a cat’s face. As shown in the image  the capsule consists of neurals with properties like the position,color,width and etc.. .Then we get a vector output with magnitude 0.9 which means we have 90% confidence that this is a cat face and we will get an orientation as well.</p>
+
+    <p><img src="http://localhost:4000/images/capsules/cat1.png" alt="alt" />/recon_cover.png
+      image from :<a href="https://cezannec.github.io/Capsule_Networks/">cezannec’s blog</a></p>
+
+    <p>But what if we have changed in these properties like we have flipped the cat’s face,what will happen ? will it detect the cat face?
+Yes it still will detect the cat’s face with 90% confidance(with magnitude 0.9) but there will be a change in the oriantation(theta)to indicate a change in the properties.</p>
+
+    <p><img src="http://localhost:4000/images/capsules/cat2.png" alt="alt" />
+      image from :<a href="https://cezannec.github.io/Capsule_Networks/">cezannec’s blog</a></p>
+  </li>
+</ul>
+
+<h3 id="what-advantages-does-it-have-compared-to-convolutional-neural-networkcnn">What advantages does it have compared to Convolutional Neural Network(CNN)?</h3>
+
+<ul>
+  <li>
+    <p>CNN is looking for key features regadless their position. As shown in the following image, CNN will detect the left image as a face while capsule network will not detect them as it will check if they are in the correct postition or not.</p>
+
+    <p><img src="http://localhost:4000/images/capsules/face.png" alt="alt" />
+image from :<a href="https://kndrck.co/posts/capsule_networks_explained/">kndrck’s blog</a></p>
+  </li>
+  <li>
+    <p>Capsules network is more rubust to affine transformations in data. if translation or rotation is done on test data, atrained Capsule network will preform better and will give higher accuracy than normal CNN.</p>
+  </li>
+</ul>
+
+<h2 id="model-architecture">Model Architecture</h2>
+
+<p>The capsule network is consisting of two main parts:</p>
+
+<ul>
+  <li>A convolutional encoder.</li>
+  <li>A fully connected, linear decoder.</li>
+</ul>
+
+<p><img src="http://localhost:4000/images/capsules/encoder_architecture.png" alt="alt" /></p>
+
+<p>(image from :<a href="https://arxiv.org/pdf/1710.09829.pdf">Hinton’s paper(capsule networks orignal paper)</a> )</p>
+
+<p>In this Explantaion and implementation i will follow the architecture from <a href="https://arxiv.org/pdf/1710.09829.pdf">Hinton paper(capsule networks orignal paper)</a></p>
+
+<h2 id="1encoder">1)Encoder</h2>
+
+<p>The ecnoder consists of three main layers as shown in the following image and the input layer which is from MNIST which has a dimension of 28 x28.</p>
+
+<p>please notice the difference between this image and the previous image where the last layer is the decoder in the pravious image.</p>
+
+<p><img src="http://localhost:4000/images/capsules/encoder_only.png" alt="alt" /></p>
+
+<h3 id="athe-convolutional-layer">A)The convolutional layer</h3>
+
+<p>So in Hinton’s paper they have applied a kernel of size 9x9 to the input layer. This kernel has a depth of 256,stride =1 and padding = 0.This will give us an output of a dimenstion 20x20.</p>
+
+<p><strong>Note</strong> :
+you can calculate the output dimenstion by this eqaution, output = [(w-k+2p)/s]+1 , where:</p>
+<ul>
+  <li>w is the input size</li>
+  <li>k is the kernel size</li>
+  <li>p is padding</li>
+  <li>s is stride</li>
+</ul>
+
+<p>So to clarify this more:</p>
+<ul>
+  <li>The input’s dimension is (28,28,1) where the 28x28 is the input size and 1 is the number of channels.</li>
+  <li>Kernel’s dimention is (9,9,1,256) where 9x9  is the kernel size ,1 is the number of channels and 256 is the depth of the kernel .</li>
+  <li>The output’s dimension is (20,20,256) where 20x20 is the ouptut size and 256 is the stack of filtered images.</li>
+</ul>
+
+<p>I think we are ready to start implementing the code now, so let us start by obtaining the MNIST data and create our DataLoaders for training and testing purposes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
+    <span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="n">transforms</span>
+
+    <span class="c1"># number of subprocesses to use for data loading
+</span>    <span class="n">num_workers</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># how many samples per batch to load
+</span>    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="c1"># convert data to Tensors
+</span>    <span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="p">.</span><span class="n">ToTensor</span><span class="p">()</span>
+
+    <span class="c1"># choose the training and test datasets
+</span>    <span class="n">train_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s">'data'</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                <span class="n">download</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s">'data'</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                               <span class="n">download</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+    <span class="c1"># prepare data loaders
+</span>    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span>
+                                               <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                                               <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+
+    <span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span>
+                                              <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                                              <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The nexts step is to create the convolutional layer as we explained:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">ConvLayer</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+            <span class="s">'''Constructs the ConvLayer with a specified input and output size.
+               These sizes has initial values from the paper.
+               param input_channel: input depth of an image, default value = 1
+               param output_channel: output depth of the convolutional layer, default value = 256
+               '''</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">ConvLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+
+            <span class="c1"># defining a convolutional layer of the specified size
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span>
+                                  <span class="n">kernel_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+            <span class="c1"># applying a ReLu activation to the outputs of the conv layer
+</span>            <span class="n">output</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># we will have dimensions (batch_size, 20, 20, 256)
+</span>            <span class="k">return</span> <span class="n">output</span>
+</code></pre></div></div>
+
+<h3 id="bprimary-capsules">B)Primary capsules</h3>
+
+<p>This layer is tricky but i will try to simplify it as much as i can.
+We would like to convolute the first layer to a new layer with 8 primary capsules.
+To do so we will follow Hinton’s paper steps:</p>
+<ul>
+  <li>First step is to convolute our first Convolutional layer which has a dimension of (20 ,20 ,256) with a kernel of dimension(9,9,256,256) in which 9 is the kernel size,first 256 is the number of chanels from the first layer and the second 256 is the number of filters or the depth of the kernel.We will get an output with a dimension of (6,6,256) .</li>
+  <li>second step is to reshape this output to (6,6,8,32) where 8 is the number of capsules and 32 is the depth of each capsule .</li>
+  <li>Now the output of each capsule will have a dimension of (6,6,32) and we will reshape it to (32x32x6,1) = (1152,1) for each capsule.</li>
+  <li>Final step we will squash the output to have a magnitute between 0 and 1 as we have discussed earlier using the following equation :</li>
+</ul>
+
+<script type="math/tex; mode=display">v_j = \frac{||\ s_j^2\ ||\ s_j }{1 + ||\ s_j^2\ ||\ s_j }</script>
+
+<p>where Vj is the normalized output vector of capsule j, Sj is the total inputs of each capsule (which is the sum of weights over all the output vectors from the capsules in the layer below capsule).</p>
+
+<p>We will use ModuleList container to loop on each capsule we have.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">PrimaryCaps</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_capsules</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">in_channels</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+            <span class="s">'''Constructs a list of convolutional layers to be used in
+               creating capsule output vectors.
+               param num_capsules: number of capsules to create
+               param in_channels: input depth of features, default value = 256
+               param out_channels: output depth of the convolutional layers, default value = 32
+               '''</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">PrimaryCaps</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+
+            <span class="c1"># creating a list of convolutional layers for each capsule I want to create
+</span>            <span class="c1"># all capsules have a conv layer with the same parameters
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">capsules</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">ModuleList</span><span class="p">([</span>
+                <span class="n">nn</span><span class="p">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span>
+                          <span class="n">kernel_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_capsules</span><span class="p">)])</span>
+
+        <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            <span class="s">'''Defines the feedforward behavior.
+               param x: the input; features from a convolutional layer
+               return: a set of normalized, capsule output vectors
+               '''</span>
+            <span class="c1"># get batch size of inputs
+</span>            <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># reshape convolutional layer outputs to be (batch_size, vector_dim=1152, 1)
+</span>            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">capsule</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">capsule</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">capsules</span><span class="p">]</span>
+            <span class="c1"># stack up output vectors, u, one for each capsule
+</span>            <span class="n">u</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">cat</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># squashing the stack of vectors
+</span>            <span class="n">u_squash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">squash</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">u_squash</span>
+
+        <span class="k">def</span> <span class="nf">squash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_tensor</span><span class="p">):</span>
+            <span class="s">'''Squashes an input Tensor so it has a magnitude between 0-1.
+               param input_tensor: a stack of capsule inputs, s_j
+               return: a stack of normalized, capsule output vectors, v_j
+               '''</span>
+            <span class="n">squared_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_tensor</span> <span class="o">**</span> <span class="mi">2</span><span class="p">).</span><span class="nb">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">squared_norm</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">squared_norm</span><span class="p">)</span> <span class="c1"># normalization coeff
+</span>            <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">input_tensor</span> <span class="o">/</span> <span class="n">torch</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">squared_norm</span><span class="p">)</span>    
+            <span class="k">return</span> <span class="n">output_tensor</span>
+
+</code></pre></div></div>
+
+<h3 id="cdigit-capsules">C)Digit Capsules</h3>
+
+<p>As we have 10 digit classes from 0 to 9, this layer will have 10 capsules each capsule is for one digit.
+Each capsule takes an input of a batch of 1152 dimensional vector while the output is a ten 16 dimnsional vector.</p>
+
+<h3 id="dynamic-routing">Dynamic Routing</h3>
+<p>Dynamic routing is used to find the best matching between the best connections between the child layer and the possible parent.Main companents of the dynamic routing is the capsule routing.
+To make it easier we can think of the capsule routing as it is backprobagation.we can use it to obtain the probability that a certain capsule’s output should go to a parent capsule in the next layer.</p>
+
+<p>As shown in the following figure The first child capsule is connected to  <script type="math/tex">s_{1}</script> which is the fist possible parent capsule and to <script type="math/tex">s_{2}</script> which is the second possible parent capsule.In the begining the coupling will have equal values like both of them are zeros then we start apply dynamic routing to adjust it.We will find for example that coupling coffecient connected with  <script type="math/tex">s_{1}</script> is 0.9 and coupling coffecient connected with  <script type="math/tex">s_{2}</script>  is 0.1, that means the probability that first child capsule’s output should go to a parent capsule in the next layer.</p>
+
+<p><img src="/images/capsules/diagram.png" alt="image-center" class="align-center" /></p>
+
+<p><strong>Notes</strong></p>
+
+<ul>
+  <li>
+    <p>Across all connections between one child capsule and all possible parent capsules, the coupling coefficients should sum to 1.This means That <script type="math/tex">c_{11}</script> + <script type="math/tex">c_{12}</script> = 1 .</p>
+  </li>
+  <li>
+    <p>As shown in the following figure  <script type="math/tex">s_{1}</script>  is the total inputs of each capsule (which is the sum of weights over all the output vectors from the capsules in the layer below capsule).</p>
+  </li>
+  <li>
+    <p>To check the similarity between the total inputs <script type="math/tex">s_{1}</script> and each vector we will calculate the dot product between both of them, in this example we will find that <script type="math/tex">s_{1}</script> is more similar to <script type="math/tex">u_{1}</script> than  <script type="math/tex">u_{2}</script> or  <script type="math/tex">u_{3}</script> , This similarity called (agreement).</p>
+
+    <p><img src="http://localhost:4000/images/capsules/s_1.png" alt="alt" /></p>
+  </li>
+</ul>
+
+<h3 id="dynamic-routing-algorithm">Dynamic Routing Algorithm</h3>
+
+<p>The followin algorithm is from <a href="https://arxiv.org/pdf/1710.09829.pdf">Hinton’s paper(capsule networks orignal paper)</a>.</p>
+
+<p><img src="http://localhost:4000/images/capsules/Dynamic_routing.png" alt="alt" /></p>
+
+<p>we can simply explain the algorithm as folowing :</p>
+<ol>
+  <li>First we initialize  the initial logits  <script type="math/tex">b_{ij}</script> of the softmax function with zero</li>
+  <li>
+    <p>calculate the capsule coefficiant using the softmax equation.
+<script type="math/tex">c_{ij} = \frac{e^{\ b_{ij}}}{\sum_{k}\ {e^{\ b_{ik}}}}</script></p>
+  </li>
+  <li>calculate the total capsule inputs <script type="math/tex">s_{1}</script> .</li>
+  <li>squash to get a normalized vector output  <script type="math/tex">v_{j}</script></li>
+  <li>last step is composed of two steps, we will calculate agreement and the new <script type="math/tex">b_{ij}</script> .The similarity (agremeent) is that we have discussed before,which is the cross product between prediction vector <script type="math/tex">\hat{u}</script> and parent capsule’s output vector <script type="math/tex">s_{1}</script> . The second step is to update <script type="math/tex">b_{ij}</script> .</li>
+</ol>
+
+<script type="math/tex; mode=display">\hat{u} = W u</script>
+
+<script type="math/tex; mode=display">a = v \cdot u</script>
+
+<script type="math/tex; mode=display">b_{ij} = b_{ij} + a</script>
+
+<p><strong>Note</strong></p>
+
+<ul>
+  <li>
+    <p>The equation of <script type="math/tex">s_{j}</script>  is   <script type="math/tex">s_j = \sum{c_{ij} \ \hat{u}}</script></p>
+  </li>
+  <li>
+    <p><script type="math/tex">\hat{u} = Wu</script>  where W is the weight matrix and u is the input vector</p>
+  </li>
+</ul>
+
+<p>Before implementing the Dynamic Routing we will transpose softmax function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># to get transpose softmax function # for multiplication reason s_J
+</span>        <span class="c1"># transpose input
+</span>        <span class="n">transposed_input</span> <span class="o">=</span> <span class="n">input_tensor</span><span class="p">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># calculate softmax
+</span>        <span class="n">softmaxed_output</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">transposed_input</span><span class="p">.</span><span class="n">contiguous</span><span class="p">().</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">transposed_input</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># un-transpose result
+</span>        <span class="k">return</span> <span class="n">softmaxed_output</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="o">*</span><span class="n">transposed_input</span><span class="p">.</span><span class="n">size</span><span class="p">()).</span><span class="n">transpose</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>After understanding the algorithm, we are able to write the dynamic routing Algorithm:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="c1"># dynamic routing
+</span>     <span class="k">def</span> <span class="nf">dynamic_routing</span><span class="p">(</span><span class="n">b_ij</span><span class="p">,</span> <span class="n">u_hat</span><span class="p">,</span> <span class="n">squash</span><span class="p">,</span> <span class="n">routing_iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+         <span class="s">'''Performs dynamic routing between two capsule layers.
+            param b_ij: initial log probabilities that capsule i should be coupled to capsule j
+            param u_hat: input, weighted capsule vectors, W u
+            param squash: given, normalizing squash function
+            param routing_iterations: number of times to update coupling coefficients
+            return: v_j, output capsule vectors
+            '''</span>    
+         <span class="c1"># update b_ij, c_ij for number of routing iterations
+</span>         <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">routing_iterations</span><span class="p">):</span>
+             <span class="c1"># softmax calculation of coupling coefficients, c_ij
+</span>             <span class="n">c_ij</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">b_ij</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+             <span class="c1"># calculating total capsule inputs, s_j = sum(c_ij*u_hat)
+</span>             <span class="n">s_j</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_ij</span> <span class="o">*</span> <span class="n">u_hat</span><span class="p">).</span><span class="nb">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+             <span class="c1"># squashing to get a normalized vector output, v_j
+</span>             <span class="n">v_j</span> <span class="o">=</span> <span class="n">squash</span><span class="p">(</span><span class="n">s_j</span><span class="p">)</span>
+
+             <span class="c1"># if not on the last iteration, calculate agreement and new b_ij
+</span>             <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">routing_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                 <span class="c1"># agreement
+</span>                 <span class="n">a_ij</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_hat</span> <span class="o">*</span> <span class="n">v_j</span><span class="p">).</span><span class="nb">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+                 <span class="c1"># new b_ij
+</span>                 <span class="n">b_ij</span> <span class="o">=</span> <span class="n">b_ij</span> <span class="o">+</span> <span class="n">a_ij</span>
+
+         <span class="k">return</span> <span class="n">v_j</span> <span class="c1"># return latest v_j
+</span></code></pre></div></div>
+
+<p>After implementing the dynamic routing we are ready to implement the Digitcaps class,which consisits of :</p>
+<ul>
+  <li>This layer is composed of 10 “digit” capsules, one for each of our digit classes 0-9.</li>
+  <li>Each capsule takes, as input, a batch of 1152-dimensional vectors produced by our 8 primary capsules, above.</li>
+  <li>Each of these 10 capsules is responsible for producing a 16-dimensional output vector.</li>
+  <li>we will inizialize the weights matrix randomly.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">DigitCaps</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_capsules</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">previous_layer_nodes</span><span class="o">=</span><span class="mi">32</span><span class="o">*</span><span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span>
+                     <span class="n">in_channels</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">):</span>
+            <span class="s">'''Constructs an initial weight matrix, W, and sets class variables.
+               param num_capsules: number of capsules to create
+               param previous_layer_nodes: dimension of input capsule vector, default value = 1152
+               param in_channels: number of capsules in previous layer, default value = 8
+               param out_channels: dimensions of output capsule vector, default value = 16
+               '''</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">DigitCaps</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+
+            <span class="c1"># setting class variables
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">num_capsules</span> <span class="o">=</span> <span class="n">num_capsules</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">previous_layer_nodes</span> <span class="o">=</span> <span class="n">previous_layer_nodes</span> <span class="c1"># vector input (dim=1152)
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_channels</span> <span class="c1"># previous layer's number of capsules
+</span>
+            <span class="c1"># starting out with a randomly initialized weight matrix, W
+</span>            <span class="c1"># these will be the weights connecting the PrimaryCaps and DigitCaps layers
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">num_capsules</span><span class="p">,</span> <span class="n">previous_layer_nodes</span><span class="p">,</span>
+                                              <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+            <span class="s">'''Defines the feedforward behavior.
+               param u: the input; vectors from the previous PrimaryCaps layer
+               return: a set of normalized, capsule output vectors
+               '''</span>
+
+            <span class="c1"># adding batch_size dims and stacking all u vectors
+</span>            <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="c1"># 4D weight matrix
+</span>            <span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">W</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+            <span class="c1"># calculating u_hat = W*u
+</span>            <span class="n">u_hat</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+
+            <span class="c1"># getting the correct size of b_ij
+</span>            <span class="c1"># setting them all to 0, initially
+</span>            <span class="n">b_ij</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="o">*</span><span class="n">u_hat</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+
+            <span class="c1"># moving b_ij to GPU, if available
+</span>            <span class="k">if</span> <span class="n">TRAIN_ON_GPU</span><span class="p">:</span>
+                <span class="n">b_ij</span> <span class="o">=</span> <span class="n">b_ij</span><span class="p">.</span><span class="n">cuda</span><span class="p">()</span>
+
+            <span class="c1"># update coupling coefficients and calculate v_j
+</span>            <span class="n">v_j</span> <span class="o">=</span> <span class="n">dynamic_routing</span><span class="p">(</span><span class="n">b_ij</span><span class="p">,</span> <span class="n">u_hat</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">squash</span><span class="p">,</span> <span class="n">routing_iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">v_j</span> <span class="c1"># return final vector outputs
+</span>
+
+        <span class="k">def</span> <span class="nf">squash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_tensor</span><span class="p">):</span>
+            <span class="s">'''Squashes an input Tensor so it has a magnitude between 0-1.
+               param input_tensor: a stack of capsule inputs, s_j
+               return: a stack of normalized, capsule output vectors, v_j
+               '''</span>
+            <span class="c1"># same squash function as before
+</span>            <span class="n">squared_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_tensor</span> <span class="o">**</span> <span class="mi">2</span><span class="p">).</span><span class="nb">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">squared_norm</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">squared_norm</span><span class="p">)</span> <span class="c1"># normalization coeff
+</span>            <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">input_tensor</span> <span class="o">/</span> <span class="n">torch</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">squared_norm</span><span class="p">)</span>    
+            <span class="k">return</span> <span class="n">output_tensor</span>
+</code></pre></div></div>
+
+<h2 id="2decoder">2)Decoder</h2>
+
+<p>As shown in the following figure from <a href="https://arxiv.org/pdf/1710.09829.pdf">Hinton’s paper(capsule networks orignal paper)</a>, The decoder is made of three fully-connected, linear layers. The first layer sees the 10, 16-dimensional output vectors from the digit capsule layer and produces hidden_dim=512 number of outputs. The next hidden layer = 1024 , and the third and final linear layer produces an output of 784 values which is a 28x28 image!</p>
+
+<p><img src="/images/capsules/decoder.png" alt="image-center" class="align-center" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_vector_length</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">input_capsules</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+            <span class="s">'''Constructs an series of linear layers + activations.
+               param input_vector_length: dimension of input capsule vector, default value = 16
+               param input_capsules: number of capsules in previous layer, default value = 10
+               param hidden_dim: dimensions of hidden layers, default value = 512
+               '''</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Decoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+
+            <span class="c1"># calculate input_dim
+</span>            <span class="n">input_dim</span> <span class="o">=</span> <span class="n">input_vector_length</span> <span class="o">*</span> <span class="n">input_capsules</span>
+
+            <span class="c1"># define linear layers + activations
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">linear_layers</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+                <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span> <span class="c1"># first hidden layer
+</span>                <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+                <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="c1"># second, twice as deep
+</span>                <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+                <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">),</span> <span class="c1"># can be reshaped into 28*28 image
+</span>                <span class="n">nn</span><span class="p">.</span><span class="n">Sigmoid</span><span class="p">()</span> <span class="c1"># sigmoid activation to get output pixel values in a range from 0-1
+</span>                <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            <span class="s">'''Defines the feedforward behavior.
+               param x: the input; vectors from the previous DigitCaps layer
+               return: two things, reconstructed images and the class scores, y
+               '''</span>
+            <span class="n">classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">).</span><span class="nb">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+            <span class="n">classes</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># find the capsule with the maximum vector length
+</span>            <span class="c1"># here, vector length indicates the probability of a class' existence
+</span>            <span class="n">_</span><span class="p">,</span> <span class="n">max_length_indices</span> <span class="o">=</span> <span class="n">classes</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># create a sparse class matrix
+</span>            <span class="n">sparse_matrix</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 10 is the number of classes
+</span>            <span class="k">if</span> <span class="n">TRAIN_ON_GPU</span><span class="p">:</span>
+                <span class="n">sparse_matrix</span> <span class="o">=</span> <span class="n">sparse_matrix</span><span class="p">.</span><span class="n">cuda</span><span class="p">()</span>
+            <span class="c1"># get the class scores from the "correct" capsule
+</span>            <span class="n">y</span> <span class="o">=</span> <span class="n">sparse_matrix</span><span class="p">.</span><span class="n">index_select</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">max_length_indices</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="c1"># create reconstructed pixels
+</span>            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">None</span><span class="p">]</span>
+            <span class="c1"># flatten image into a vector shape (batch_size, vector_dim)
+</span>            <span class="n">flattened_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">contiguous</span><span class="p">().</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># create reconstructed image vectors
+</span>            <span class="n">reconstructions</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">linear_layers</span><span class="p">(</span><span class="n">flattened_x</span><span class="p">)</span>
+
+            <span class="c1"># return reconstructions and the class scores, y
+</span>            <span class="k">return</span> <span class="n">reconstructions</span><span class="p">,</span> <span class="n">y</span>
+</code></pre></div></div>
+
+<p>Now let us collect all these layers (classes that we have created i.e ConvLayer,PrimaryCaps,DigitCaps,Decoder) in one class called CapsuleNetwork.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># instantiate and print net
+</span>    <span class="n">capsule_net</span> <span class="o">=</span> <span class="n">CapsuleNetwork</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">capsule_net</span><span class="p">)</span>
+
+    <span class="c1"># move model to GPU, if available
+</span>    <span class="k">if</span> <span class="n">TRAIN_ON_GPU</span><span class="p">:</span>
+        <span class="n">capsule_net</span> <span class="o">=</span> <span class="n">capsule_net</span><span class="p">.</span><span class="n">cuda</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="margin-loss">Margin Loss</h3>
+
+<p>Margin Loss is a classification loss (we can think of it as cross entropy) which is based on the length of the output vectors coming from the DigitCaps layer.</p>
+
+<p>so let us try to elaborate it more on our example.Let us say we have an output vector called (x) coming from the digitcap layer, this ouput vector represents a certain digit from 0 to 9 as we are using MNIST. Then we will square the length(take the square root of the squared value) of the corresponding output vector of that digit capsule <script type="math/tex">v_k = \sqrt{x^2}</script> . The right capsule should have an output vector of greater than or equal 0.9 (<script type="math/tex">v_k >=0.9</script>) value while other capsules should output of smaller than or eqaul 0.1( <script type="math/tex">% <![CDATA[
+v_k<=0.1 %]]></script> ).</p>
+
+<p>So, if we have an input image of a 0, then the “correct,” zero-detecting, digit capsule should output a vector of magnitude 0.9 or greater! For all the other digits (1-9, in this example) the corresponding digit capsule output vectors should have a magnitude that is 0.1 or less.</p>
+
+<p>The following function is used to calculate the margin loss as it sums both sides of the 0.9 and 0.1 and k is the digit capsule.</p>
+
+<p><img src="/images/capsules/margin_loss.png" alt="image-center" class="align-center" /></p>
+
+<p>where(<script type="math/tex">T_k = 1</script>) if a digit of class k is present
+and <script type="math/tex">m^{+}</script> = 0.9 and <script type="math/tex">m^{-}</script> = 0.1. The λ down-weighting
+of the loss for absent digit classes stops the initial learning from shrinking the lengths of the activity vectors of all the digit capsules. In the paper they have choosen λ = 0.5.</p>
+
+<p><strong>Note</strong> :</p>
+
+<p>The total loss is simply the sum of the losses of all digit capsules.</p>
+
+<p>Now we have to call the custom loss class we have implemented and we will use Adam optimizer as in the paper.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
+
+<span class="c1"># custom loss
+</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">CapsuleLoss</span><span class="p">()</span>
+
+<span class="c1"># Adam optimizer with default params
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">capsule_net</span><span class="p">.</span><span class="n">parameters</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="train-the-network">Train the network</h2>
+
+<p>So the normal steps to do the training from a batch of data:</p>
+
+<ol>
+  <li>Clear the gradients of all optimized variables, by making them zero.</li>
+  <li>Forward pass: compute predicted outputs by passing inputs to the model.</li>
+  <li>Calculate the loss .</li>
+  <li>Backward pass: compute gradient of the loss with respect to model parameters.</li>
+  <li>Perform a single optimization step (parameter update).</li>
+  <li>Update average training loss .</li>
+</ol>
+
+<p><strong>Note</strong></p>
+
+<p>In this blog post i will not go through the train and test function as they are straight forward and they are slightly the same steps as training any network , but i will leave the implemented code in this link.</p>
+
+<p>As shown in the following graph, the training loss is decreasing till 0.020.</p>
+
+<p><img src="/images/capsules/training_loss.png" alt="image-center" class="align-center" /></p>
+
+<h2 id="test-the-network">Test the network</h2>
+
+<p>I have tested the trained network on unseen data, and I had a good results.</p>
+
+<p><img src="/images/capsules/accuracy.png" alt="image-center" class="align-center" /></p>
+
+<p>And these are the reconstructed images.</p>
+
+<p><img src="http://localhost:4000/images/capsules/recon.png" alt="alt" /></p>
+
+<p><strong>For the complete code please check my github repository <a href="https://github.com/noureldinalaa/Capsule-Networks">my github repository </a></strong></p>
+
+<h2 id="references-">References :</h2>
+<ol>
+  <li>https://arxiv.org/pdf/1710.09829.pdf</li>
+  <li>https://cezannec.github.io/Capsule_Networks/</li>
+  <li>https://kndrck.co/posts/capsule_networks_explained/</li>
+  <li>https://github.com/cezannec/capsule_net_pytorch/blob/master/Capsule_Network.ipynb</li>
+  <li>https://www.youtube.com/watch?v=1dIEyZuZui0</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-12-08T00:00:00+00:00">December 08, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Simple+explanation+for+Capsule+Network+with+Pytoch+implementation%20http%3A%2F%2Flocalhost%3A4000%2FcapsuleNetwork%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FcapsuleNetwork%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2FcapsuleNetwork%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FcapsuleNetwork%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/capsuleNetwork/" rel="permalink">Simple explanation for Capsule Network with Pytoch implementation
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Capsule Network, Dynamic Routing , Pytorch
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="https://github.com/noureldinalaa"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Nour. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+  </body>
+</html>

@@ -253,6 +253,11 @@ defaults:
       comments: # true
       share: true
       related: true
+   # Table
+      toc: true
+      toc_label: "Capsule Network"
+      toc_icon: "bookmark"
+
 
   # _pages
   - scope:
