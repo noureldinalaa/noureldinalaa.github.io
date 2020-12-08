@@ -49,7 +49,7 @@ To implement capsule Network, we need to understand what are capsules first and 
     ![alt]({{ site.url }}{{ site.baseurl }}/images/capsules/face.png)
 image from :[kndrck's blog](https://kndrck.co/posts/capsule_networks_explained/)
 
-  * Capsules network is more rubust to affine transformations in data. if translation or rotation is done on test data, atrained Capsule network will preform better and will give higher accuracy than normal CNN.
+  * Capsules network is more rubust to affine transformations in data. If translation or rotation is done on test data, a trained Capsule network will preform better and will give a higher accuracy than normal CNN.
 
 ## Model Architecture
 
