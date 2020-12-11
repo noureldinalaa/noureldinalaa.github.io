@@ -22,8 +22,9 @@ Worked on different research and production tasks including:
 
 
 ### Intern at Microsoft AppFactory (Egypt) (October 2016 - June 2017)
-- Worked as a technical evangelist by presenting different Microsoft solutions and devices like Azure and Hololens in Microsoft's events.
-- Introduce Microsoft solutions to startups(Xamarin, Azure).
+- Meeting Startups in events, introducing different Microsoft solutions and technologies to them like Azure, Xamarin, Hololens, etc.
+- Representing Microsoft in their Events and Booths.
+- Introducing Microsoft Hololens in one of the biggest conferences in egypt (Cairo ICT).
 
 ## University's projects
 ### Depression Detection[[github]](https://github.com/noureldinalaa/depression_detector)
@@ -36,12 +37,12 @@ Worked on different research and production tasks including:
 ### Monocular visual odometry for Duckie Town competition(in progress)
 
 - Detecting features from an image and calculate the optical flow between two frames.
-- Research area still in progress (create a neural network architecture to calculate instead of using opencv library)
+- create a neural network architecture to calculate rotation and displacement instead of using openCV library (Research area still in progress).
 - Pytorch and opencv are used in this project.
 
 ### Nod detection using SVM
 
-- SVM model to classify nod or not by feedin it annotated videos with nods.
+- SVM model to classify wether there is a nod or not(detect Nod),from annotated videos with nods.
 - Dlib machine learning library used and C++ used.
 
 ### Manipulating robot arm (KUKA) using VR Controller (ROS C++)
