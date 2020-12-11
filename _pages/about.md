@@ -16,10 +16,9 @@ I am working now on two interesting projects:
 ## Experience
 ### Student Research Assistant at Fraunhofer institute (Germany) (june 2018 - september 2019)
 Worked on different research and production tasks including:
-- Evaluation of Fuzzy string matching and natural language processing procedures well as implementation of a demonstration for automated word processing with the help of Fuzzy string matching and natural language processing.
+- Evaluation and implementation of different Fuzzy string Matching Procedures as well as Natural language processing procedures to compare between them.
 - Development of graphical java swing user interface for control and manipulating UML/SysML models.
-- Development of QVTO - based model transformation for the transfer of UML/SysML Models to forms of presentation and the development of programmes for the automated creation of UML/SysML diagrams,
-- participating in research activities and presenting the research results in events as well as teaching assistant in a company-university projects in context of Model based system engineering.
+- Participating in research activities and presenting the research results in events as well being a teaching assistant in a company-university projects in context of Model based system engineering.
 
 
 ### Intern at Microsoft AppFactory (Egypt) (October 2016 - June 2017)
